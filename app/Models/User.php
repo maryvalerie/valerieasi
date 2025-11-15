@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class User extends Authenticatable
+{
+    use HasFactory, Notifiable;
+
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'phone',
+        'address',
+        'birthdate',
+        'user_type',
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'birthdate' => 'date',
+        ];
+    }
+
+    public function documentRequests()
+    {
+        return $this->hasMany(DocumentRequest::class);
+    }
+
+    public function permits()
+    {
+        return $this->hasMany(Permit::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function isAdmin()
+    {
+        return $this->user_type === 'admin';
+    }
+
+    public function isResident()
+    {
+        return $this->user_type === 'resident';
+    }
+}
