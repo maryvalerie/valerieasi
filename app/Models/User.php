@@ -35,19 +35,33 @@ class User extends Authenticatable
         ];
     }
 
-    public function documentRequests() {
+    public function documentRequests()
+    {
         return $this->hasMany(DocumentRequest::class);
     }
 
-    public function permits() {
+    public function permits()
+    {
         return $this->hasMany(Permit::class);
     }
 
-    public function transactions() {
+    public function transactions()
+    {
         return $this->hasMany(Transaction::class);
     }
 
-    public function getFullNameAttribute() {
+    public function getFullNameAttribute()
+    {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function isAdmin()
+    {
+        return $this->user_type === 'admin';
+    }
+
+    public function isResident()
+    {
+        return $this->user_type === 'resident';
     }
 }

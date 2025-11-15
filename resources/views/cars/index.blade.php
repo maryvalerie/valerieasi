@@ -102,50 +102,9 @@
             justify-content: center;
             margin: 0 auto 20px;
         }
-        .login-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            background: white;
-        }
-        .btn-login {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            border: none;
-            border-radius: 20px;
-            padding: 10px 30px;
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .btn-login:hover {
-            transform: scale(1.05);
-            color: white;
-        }
-        .nav-link {
-            color: white !important;
-            font-weight: 500;
-        }
-        .nav-link:hover {
-            color: #f8f9fa !important;
-        }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">
-                <i class="fas fa-car me-2"></i>AutoShow
-            </a>
-            
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    <i class="fas fa-sign-in-alt me-1"></i>Login
-                </a>
-            </div>
-        </div>
-    </nav>
-
     <!-- Header -->
     <div class="header-section">
         <div class="container">
@@ -155,46 +114,6 @@
                 </div>
                 <h1 class="display-5 fw-bold">AutoShow Car Dealership</h1>
                 <p class="lead">Find your perfect car from our premium collection</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content login-card">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="loginModalLabel">
-                        <i class="fas fa-sign-in-alt me-2"></i>Login to Your Account
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <form id="loginForm">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="remember">
-                            <label class="form-check-label" for="remember">Remember me</label>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-login">
-                                <i class="fas fa-sign-in-alt me-2"></i>Login
-                            </button>
-                        </div>
-                    </form>
-                    <div class="text-center mt-3">
-                        <small class="text-muted">
-                            Don't have an account? <a href="#" class="text-decoration-none">Sign up</a>
-                        </small>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -291,27 +210,5 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Simple login form handler
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            // Simple validation
-            if (email && password) {
-                alert('Login successful! Welcome back.');
-                // Close modal
-                var loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-                loginModal.hide();
-                
-                // Clear form
-                document.getElementById('loginForm').reset();
-            } else {
-                alert('Please fill in all fields.');
-            }
-        });
-    </script>
 </body>
 </html>

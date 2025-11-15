@@ -7,8 +7,6 @@ Route::get('/', function () {
     return redirect('/cars');
 });
 
-Route::get('/cars', [CarController::class, 'index']);
+Route::get('/cars', [CarController::class, 'index'])->name('cars.index');
 Route::get('/cars/{id}', [CarController::class, 'show'])->name('cars.show');
 Route::post('/orders', [CarController::class, 'storeOrder'])->name('orders.store');
-
-

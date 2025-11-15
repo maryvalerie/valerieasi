@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('phone');
-            $table->string('address');
+            $table->text('address');
             $table->date('birthdate');
             $table->enum('user_type', ['resident', 'staff', 'admin'])->default('resident');
             $table->string('password');
