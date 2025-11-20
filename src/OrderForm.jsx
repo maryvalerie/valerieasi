@@ -1,105 +1,105 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 function OrderForm() {
-  const [form, setForm] = useState({
+  const location = useLocation();
+  
+  const queryParams = new URLSearchParams(location.search);
+  const selectedCar = queryParams.get("car") || "";
+
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    car: "",
+    car: selectedCar,
     payment: "",
     message: ""
   });
 
-  const query = new URLSearchParams(useLocation().search);
-  const selectedCar = query.get("car");
-
   useEffect(() => {
-    if (selectedCar) {
-      setForm(prev => ({ ...prev, car: selectedCar }));
-    }
+    setFormData((prev) => ({ ...prev, car: selectedCar }));
   }, [selectedCar]);
 
   function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    alert("ORDER SUBMITTED:\n\n" + JSON.stringify(form, null, 2));
+    alert("Order Successfully Submitted!\n\n" + JSON.stringify(formData, null, 2));
   }
 
   return (
-    <div style={styles.wrapper}>
-      <div style={styles.container}>
+    <div style={styles.page}>
+      <div style={styles.formContainer}>
         <h1 style={styles.title}>Car Order Form</h1>
 
         <form onSubmit={handleSubmit} style={styles.form}>
-
           <label style={styles.label}>Full Name</label>
           <input
-            style={styles.input}
             type="text"
             name="name"
             required
-            value={form.name}
+            value={formData.name}
             onChange={handleChange}
+            style={styles.input}
           />
 
           <label style={styles.label}>Email</label>
           <input
-            style={styles.input}
             type="email"
             name="email"
             required
-            value={form.email}
+            value={formData.email}
             onChange={handleChange}
+            style={styles.input}
           />
 
           <label style={styles.label}>Phone</label>
           <input
-            style={styles.input}
             type="text"
             name="phone"
             required
-            value={form.phone}
+            value={formData.phone}
             onChange={handleChange}
+            style={styles.input}
           />
 
-          <label style={styles.label}>Car Model</label>
+          <label style={styles.label}>Selected Car</label>
           <input
-            style={styles.input}
             type="text"
             name="car"
-            required
-            value={form.car}
-            onChange={handleChange}
+            readOnly
+            value={formData.car}
+            style={{ ...styles.input, background: "#eee", cursor: "not-allowed" }}
           />
 
           <label style={styles.label}>Payment Method</label>
           <select
-            style={styles.input}
             name="payment"
             required
-            value={form.payment}
+            value={formData.payment}
             onChange={handleChange}
+            style={styles.input}
           >
-            <option value="">Select</option>
+            <option value="">Select Payment Method</option>
             <option value="Cash">Cash</option>
             <option value="Bank Financing">Bank Financing</option>
-            <option value="In-House Financing">In-House Financing</option>
+            <option value="In-house Financing">In-house Financing</option>
           </select>
 
-          <label style={styles.label}>Message (optional)</label>
+          <label style={styles.label}>Message (Optional)</label>
           <textarea
-            style={styles.textarea}
             name="message"
-            rows="3"
-            value={form.message}
+            rows="4"
+            value={formData.message}
             onChange={handleChange}
+            style={styles.textarea}
           />
 
-          <button type="submit" style={styles.button}>Submit Order</button>
+          <button type="submit" style={styles.submitButton}>
+            Submit Order
+          </button>
         </form>
       </div>
     </div>
@@ -107,37 +107,37 @@ function OrderForm() {
 }
 
 const styles = {
-  wrapper: {
+  page: {
+    width: "100%",
     minHeight: "100vh",
-    background: "linear-gradient(180deg,#6b0ce8,#9f5cff)",
-    paddingTop: "100px",
+    background: "linear-gradient(180deg, #5a0fc8, #8a4ef7, #c28cff)",
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    paddingTop: "80px"
   },
-  container: {
+  formContainer: {
     width: "450px",
     background: "white",
-    padding: "30px",
     borderRadius: "15px",
-    boxShadow: "0 10px 25px rgba(0,0,0,0.2)"
+    padding: "30px",
+    boxShadow: "0px 10px 25px rgba(0,0,0,0.2)"
   },
   title: {
     textAlign: "center",
-    fontSize: "28px",
     marginBottom: "20px",
+    fontSize: "28px",
     fontWeight: "bold",
-    color: "#5b0ce8"
+    color: "#4d0fc9"
   },
   form: {
     display: "flex",
     flexDirection: "column"
   },
   label: {
-    marginTop: "12px",
-    marginBottom: "4px",
-    fontWeight: "bold",
-    color: "#333",
-    fontSize: "15px"
+    marginBottom: "5px",
+    marginTop: "10px",
+    fontWeight: "600",
+    color: "#333"
   },
   input: {
     padding: "12px",
@@ -151,14 +151,14 @@ const styles = {
     border: "1px solid #ccc",
     fontSize: "16px"
   },
-  button: {
+  submitButton: {
     marginTop: "20px",
-    padding: "12px",
-    borderRadius: "10px",
-    border: "none",
-    background: "#6b0ce8",
+    background: "#6c20ff",
     color: "white",
+    padding: "12px",
     fontSize: "18px",
+    border: "none",
+    borderRadius: "10px",
     cursor: "pointer",
     transition: "0.3s"
   }

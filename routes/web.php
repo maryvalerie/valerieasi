@@ -4,7 +4,7 @@ use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect('/cars');
+    return view('welcome'); 
 });
 
 Route::get('/cars', [CarController::class, 'index'])->name('cars.index');

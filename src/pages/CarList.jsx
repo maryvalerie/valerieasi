@@ -1,4 +1,5 @@
 import CarCard from "../components/CarCard";
+import Header from "../components/Header";
 
 const cars = [
   {
@@ -6,7 +7,7 @@ const cars = [
     brand: "Toyota",
     model: "Vios 1.3 XE",
     price: "₱720,000",
-    image: "https://i.pinimg.com/1200x/51/aa/18/51aa184db4660898d58a07e99b438729.jpg",
+    image: "https://i.pinimg.com/1200x/72/54/2f/72542ff220c64bb3b067cdf749c55f8b.jpg",
   },
   {
     id: 2,
@@ -26,15 +27,18 @@ const cars = [
 
 const CarList = () => {
   return (
-    <div className="car-list-container">
-      <h1 className="title">AutoShow Car Dealership</h1>
+    <>
+      <Header />
+      <div className="car-list-container">
+        <h1 className="title">AutoShow Car Dealership</h1>
 
-      <div className="car-list">
-        {cars.map((car) => (
-          <CarCard key={car.id} car={car} />
-        ))}
+        <div className="car-list">
+          {cars.map((car) => (
+            <CarCard key={car.id} car={car} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
